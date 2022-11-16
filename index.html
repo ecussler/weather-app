@@ -7,9 +7,102 @@
     <link rel="stylesheet" type="text/css" href="./assets/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/style.css">
-    <title>Weather App</title>
+    <title>Weather Vane</title>
 </head>
 <body>
+    <!-- HEADER / HERO -->
+    <div class="px-4 py-5 my-5 text-center">
+        <!-- <img class="d-block mx-auto mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+        <h1 class="display-5 fw-bold">Weather Vane</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">Type in your city name or select a previously searched location to find your weather for today.</p>
+        </div>
+      </div>
     
+    <!-- NAVIGATION / SEARCH BAR -->  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Type in your city or zip code:</a>
+            <form>
+              <input class="form-control" type="text" placeholder="City or Zip" aria-label="Search">
+            </form>
+        </div>
+    </nav>
+
+    <!-- BODY CARD -->
+    <div class="card hide">
+      <div class="card-body">
+        This is some text within a card body.
+      </div>
+    </div>
+
+    <!-- PREVIOUS SEARCHES CARD-->
+    <div class="card">
+      <div class="card-header">
+        Previously Searched
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- SIDEBAR -->
+    <!-- <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+          <span class="fs-4">You previously searched for:</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto"> -->
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link active" aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link link-dark">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link link-dark">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+              Orders
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link link-dark">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+              Products
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link link-dark">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+              Customers
+            </a>
+          </li> -->
+        <!-- </ul>
+        <hr>
+      </div>
+      <div>
+        <div class="bg-light p-5 rounded">
+          <div class="col-sm-8 mx-auto">
+            <h1>Navbar examples</h1>
+            <p>This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a <code>.container</code>. For positioning of navbars, checkout the <a href="/docs/5.1/examples/navbar-static/">top</a> and <a href="/docs/5.1/examples/navbar-fixed/">fixed top</a> examples.</p>
+            <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
+            <p>
+              <a class="btn btn-primary" href="/docs/5.1/components/navbar/" role="button">View navbar docs »</a>
+            </p>
+          </div>
+        </div>
+      </div> -->
 </body>
 </html>
