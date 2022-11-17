@@ -22,17 +22,21 @@
     <!-- NAVIGATION / SEARCH BAR -->  
     <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Type in your city or zip code:</a>
+          <a class="navbar-brand" href="#"><strong>Type in your city name:</strong></a>
             <form>
-              <input class="form-control" type="text" placeholder="City or Zip" aria-label="Search">
+              <input id='city-input' class="form-control" type="text" placeholder="City name" aria-label="Search">
             </form>
+            <button id="submit-btn" type="button" class="btn btn-secondary">Submit</button>
         </div>
     </nav>
 
     <!-- BODY CARD -->
     <div class="card hide">
-      <div class="card-body">
-        This is some text within a card body.
+      <div id='current-weather' class="card-body">
+        Today's Weather
+      </div>
+      <div id='five-day' class="card-body">
+        5 Day Forecast Here
       </div>
     </div>
 
@@ -42,8 +46,7 @@
         Previously Searched
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text">Dynamically append the 5-day forcast.</p>
       </div>
     </div>
 
