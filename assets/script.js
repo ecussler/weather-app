@@ -13,11 +13,11 @@
 // 2: Fetch 5 day forecast from API
 //      Dynamically append those into a separate element
 
-const cityInputEl = document.getElementById('#input'); 
-const submitBtn = document.getElementById('#submit-btn'); 
-const submitForm = document.getElementById('#form'); 
-const currentWeather = document.getElementById('#current-weather'); 
-const fiveDayContainer = document.getElementById('#five-day'); 
+const submitForm = document.getElementById('form'); 
+const cityInputEl = document.getElementById('input'); 
+const submitBtn = document.getElementById('submit-btn'); 
+const currentWeather = document.getElementById('current-weather'); 
+const fiveDayContainer = document.getElementById('five-day'); 
 
 /**
  * SUBMIT BUTTON HANDLER
@@ -48,16 +48,17 @@ function formSubmitHandler(event) {
  * This function regenerates weather of previously searched cities upon click. 
  */ 
 
-function previousSearchHandler(event) {
+// function previousSearchHandler(event) {
 
-}
+// }
 
 
 
 // WEATHER FETCH FROM OPEN WEATHER 
 
 function getWeather() {
-    let requestURL = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}'; //concat where city name and api key are held
+    let city = input.value.trim();
+    let requestURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=e7f71632b8912e6ddef5440e9fe5e5fe'; 
 
     fetch(requestURL)
         .then(function (response) {
@@ -65,20 +66,20 @@ function getWeather() {
         })
         .then(function (data) {
             console.log(data); 
-        }
+        });
 };
 
 
-function saveCityLocalStorage(){
+// function saveCityLocalStorage(){
 
-}
+// }
 
-function renderPreviousSearches() {
+// function renderPreviousSearches() {
 
-}
+// }
 
-function displayWeather() {
+// function displayWeather() {
 
-}
+// }
 
 submitForm.addEventListener('submit', formSubmitHandler); 
