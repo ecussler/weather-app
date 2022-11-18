@@ -13,29 +13,51 @@
 // 2: Fetch 5 day forecast from API
 //      Dynamically append those into a separate element
 
-const cityInputEl = document.getElementById('city-input'); 
-const submitBtn = document.getElementById('submit-btn'); 
-const currentWeather = document.getElementById('current-weather'); 
-const fiveDayContainer = document.getElementById('five-day'); 
+const cityInputEl = document.getElementById('#input'); 
+const submitBtn = document.getElementById('#submit-btn'); 
+const submitForm = document.getElementById('#form'); 
+const currentWeather = document.getElementById('#current-weather'); 
+const fiveDayContainer = document.getElementById('#five-day'); 
 
+/**
+ * SUBMIT BUTTON HANDLER
+ * @param {*} event is click of submit button
+ * This function takes the input of the form (i.e. city name) and trims it to be used in the fetch.
+ */ 
 
-var formSubmitHandler = function (event) {
+function formSubmitHandler(event) {
     event.preventDefault();
   
-    var city = cityInputEl.value.trim();
-  
+    var city = input.value.trim();
+    
     if (city) {
+      console.log(city); 
       getWeather(city);
   
-      repoContainerEl.textContent = '';
-      nameInputEl.value = '';
+      currentWeather.textContent = '';
+      cityInputEl.value = '';
     } else {
       alert('Please enter a city.');
     }
-  };
+};
 
-function getWeather () {
-    let requestURL = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}'; 
+
+/**
+ * PREVIOUS SEARCH HANDLER
+ * @param {*} event is click of previously searched cities
+ * This function regenerates weather of previously searched cities upon click. 
+ */ 
+
+function previousSearchHandler(event) {
+
+}
+
+
+
+// WEATHER FETCH FROM OPEN WEATHER 
+
+function getWeather() {
+    let requestURL = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}'; //concat where city name and api key are held
 
     fetch(requestURL)
         .then(function (response) {
@@ -44,7 +66,19 @@ function getWeather () {
         .then(function (data) {
             console.log(data); 
         }
-    
+};
+
+
+function saveCityLocalStorage(){
+
 }
 
-submitBtn.addEventListener('submit', getWeather); 
+function renderPreviousSearches() {
+
+}
+
+function displayWeather() {
+
+}
+
+submitForm.addEventListener('submit', formSubmitHandler); 

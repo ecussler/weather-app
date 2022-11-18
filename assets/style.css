@@ -15,3 +15,8 @@ body {
 .card {
     margin: 5px; 
 }
+
+.navbar {
+    margin: 5px;
+    padding: 10px;
+}

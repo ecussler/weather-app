@@ -21,13 +21,10 @@
     
     <!-- NAVIGATION / SEARCH BAR -->  
     <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"><strong>Type in your city name:</strong></a>
-            <form>
-              <input id='city-input' class="form-control" type="text" placeholder="City name" aria-label="Search">
-            </form>
-            <button id="submit-btn" type="button" class="btn btn-secondary">Submit</button>
-        </div>
+        <form id="form">
+           <label>Type the name of your city: <input id='input' type="text" /></label>
+           <button id="submit-btn" type="submit" class="btn btn-secondary">Submit</button>
+        </form>
     </nav>
 
     <!-- BODY CARD -->
@@ -50,62 +47,5 @@
       </div>
     </div>
 
-
-
-
-
-    <!-- SIDEBAR -->
-    <!-- <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-          <span class="fs-4">You previously searched for:</span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto"> -->
-          <!-- <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-              Orders
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-              Products
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-              Customers
-            </a>
-          </li> -->
-        <!-- </ul>
-        <hr>
-      </div>
-      <div>
-        <div class="bg-light p-5 rounded">
-          <div class="col-sm-8 mx-auto">
-            <h1>Navbar examples</h1>
-            <p>This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a <code>.container</code>. For positioning of navbars, checkout the <a href="/docs/5.1/examples/navbar-static/">top</a> and <a href="/docs/5.1/examples/navbar-fixed/">fixed top</a> examples.</p>
-            <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
-            <p>
-              <a class="btn btn-primary" href="/docs/5.1/components/navbar/" role="button">View navbar docs »</a>
-            </p>
-          </div>
-        </div>
-      </div> -->
 </body>
 </html>
