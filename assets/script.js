@@ -163,21 +163,19 @@ function displayFiveDay(fiveDayData, city) {
             const humidity = document.createElement('p'); 
             const windSpeed = document.createElement('p');
             // Need to find icon
-            const milliseconds = data.dt * 1000; 
-            const dateObj = new Date(milliseconds); 
-            const standardDateForm = dateObj.toLocaleString()
+            const dateFormatted = data.list[i].dt_txt; 
             
             // Dynamically adds containers and elements to display information for five-day conditions
             column.setAttribute('class', 'col d-flex align-items-center');
             contentBox.setAttribute('class', 'icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3')
-            date.setAttribute('class', 'fs-4');
-            temp.setAttribute('class', 'col-sm-2 fs-6');
-            humidity.setAttribute('class', 'col-sm-2 fs-6');
-            windSpeed.setAttribute('class', 'col-sm-2 fs-6');
+            date.setAttribute('class', 'fs-4 px-4 py-5');
+            temp.setAttribute('class', 'col-sm-2 fs-6 px-4 py-5');
+            humidity.setAttribute('class', 'col-sm-2 fs-6 px-4 py-5');
+            windSpeed.setAttribute('class', 'col-sm-2 fs-6 px-4 py-5');
             // iconEl.setAttribute('src', iconURL); 
 
             // Sets content for current weather conditions
-            date.textContent = `${standardDateForm}`; 
+            date.textContent = `${dateFormatted}`; 
             temp.textContent = `Temperature will be ${data.list[i].main.temp}°F`; 
             humidity.textContent = `Humidity is ${data.list[i].main.humidity}%`; 
             windSpeed.textContent = `Wind speed is ${data.list[i].wind.speed}mph`;
