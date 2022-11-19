@@ -18,6 +18,7 @@ const cityInputEl = document.getElementById('input');
 const submitBtn = document.getElementById('submit-btn'); 
 const currentWeather = document.getElementById('current-weather'); 
 const fiveDayContainer = document.getElementById('five-day'); 
+const fiveDayRow = document.getElementById('five-day-row'); 
 
 /**
  * SUBMIT BUTTON HANDLER
@@ -33,6 +34,7 @@ function formSubmitHandler(event) {
     if (city) {
       console.log(city); 
       getWeather(city);
+      getFiveDay(city); 
   
       currentWeather.textContent = '';
       cityInputEl.value = '';
@@ -77,7 +79,7 @@ function getWeather() {
 
 function getFiveDay() {
     let city = input.value.trim();
-    let requestURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=e7f71632b8912e6ddef5440e9fe5e5fe&units=imperial'; 
+    let requestURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=e7f71632b8912e6ddef5440e9fe5e5fe&units=imperial'; 
 
     fetch(requestURL)
         .then(function (response) {
@@ -86,8 +88,14 @@ function getFiveDay() {
             }
         })
         .then(function (data) {
-            displayWeather(data, city); 
-            saveCityLocalStorage(city);  
+            console.log(data); 
+            for (let i = 0; i < 5; i++) {
+                console.log(data.list[i].main.temp);
+                console.log(data.list[i].main.humidity);
+                console.log(data.list[i].wind.speed);
+                console.log(data.list[i].dt);
+                displayFiveDay(); 
+            }
         });
 };
 
@@ -140,7 +148,7 @@ function displayWeather(weatherData, city) {
     const dateObj = new Date(milliseconds); 
     const standardDateForm = dateObj.toLocaleString()
 
-    // Dynamically adds containers and elements to display information
+    // Dynamically adds containers and elements to display information for current conditions
     jumbotron.setAttribute('class', 'p-5 mb-4 bg-light rounded-3');
     container.setAttribute('class', 'container-fluid py-5');
     h1.setAttribute('class', 'display-5 fw-bold fs-3 text');
@@ -149,7 +157,7 @@ function displayWeather(weatherData, city) {
     windSpeed.setAttribute('class', 'col-md-8 fs-5');
     iconEl.setAttribute('src', iconURL); 
     
-    
+    // Sets content for current weather conditions
     h1.textContent = `Weather in ${city} as of ${standardDateForm}`; 
     temp.textContent = `Temperature is ${weatherData.main.temp}°F`; 
     humidity.textContent = `Humidity is ${weatherData.main.humidity}%`; 
@@ -160,6 +168,47 @@ function displayWeather(weatherData, city) {
     container.append(h1, temp, humidity, windSpeed); 
     jumbotron.append(container); 
     currentWeather.append(jumbotron); 
+
+}
+
+function displayFiveDay(fiveDayData, city) {
+    if (fiveDayData.length === 0) {
+        currentWeather.textContent = "No five-day forecast for that city was found"; 
+        return; 
+    }
+//CHANGE ALL OF THESE THINGS TO MAKE IT ATTACH TO THE FIVE DAY SECTION
+    // const jumbotron = document.createElement('div'); 
+    // const container = document.createElement('div'); 
+    // const h1 = document.createElement('h1'); 
+    // const temp = document.createElement('p'); 
+    // const humidity = document.createElement('p'); 
+    // const windSpeed = document.createElement('p'); 
+    // const iconEl = document.createElement('img'); 
+    // let iconURL = 'http://openweathermap.org/img/w/' + fiveDayData.weather[0].icon + '.png'
+    // const milliseconds = weatherData.dt * 1000; 
+    // const dateObj = new Date(milliseconds); 
+    // const standardDateForm = dateObj.toLocaleString()
+
+    // // Dynamically adds containers and elements to display information for current conditions
+    // jumbotron.setAttribute('class', 'p-5 mb-4 bg-light rounded-3');
+    // container.setAttribute('class', 'container-fluid py-5');
+    // h1.setAttribute('class', 'display-5 fw-bold fs-3 text');
+    // temp.setAttribute('class', 'col-md-8 fs-5');
+    // humidity.setAttribute('class', 'col-md-8 fs-5');
+    // windSpeed.setAttribute('class', 'col-md-8 fs-5');
+    // iconEl.setAttribute('src', iconURL); 
+    
+    // // Sets content for current weather conditions
+    // h1.textContent = `Weather in ${city} as of ${standardDateForm}`; 
+    // temp.textContent = `Temperature is ${weatherData.main.temp}°F`; 
+    // humidity.textContent = `Humidity is ${weatherData.main.humidity}%`; 
+    // windSpeed.textContent = `Wind speed is ${weatherData.wind.speed}mph`; 
+    
+    // // Appends elements into DOM
+    // h1.append(iconEl); 
+    // container.append(h1, temp, humidity, windSpeed); 
+    // jumbotron.append(container); 
+    // currentWeather.append(jumbotron); 
 
 }
 
