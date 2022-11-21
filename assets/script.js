@@ -1,24 +1,10 @@
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history DONE
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed DONE
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
-// 1. Need to fetch weather information from API
-//      Input the correct information for weather right now into one card
-// 2: Fetch 5 day forecast from API
-//      Dynamically append those into a separate element
-
 const submitForm = document.getElementById('form'); 
 const cityInputEl = document.getElementById('input'); 
 const submitBtn = document.getElementById('submit-btn'); 
+const previousSearches = document.getElementById('previous-searches'); 
 const currentWeather = document.getElementById('current-weather'); 
 const fiveDayContainer = document.getElementById('five-day'); 
-// const fiveDayRow = document.getElementById('five-day-row'); 
+const previousSearchBtns = document.getElementsByClassName('btn-info'); 
 
 
 /**
@@ -30,14 +16,15 @@ const fiveDayContainer = document.getElementById('five-day');
 function formSubmitHandler(event) {
     event.preventDefault();
   
-    var city = input.value.trim();
+    let city = input.value.trim();
     
     if (city) {
-      console.log(city); 
       getWeather(city);
       getFiveDay(city); 
-  
+
+      // Clears the previous information form HTML
       currentWeather.textContent = '';
+      fiveDayContainer.textContent = '';
       cityInputEl.value = '';
     } else {
       alert('Please enter a city.');
@@ -78,10 +65,11 @@ function getFiveDay() {
             }
         })
         .then(function (data) {
-            console.log(data);
             displayFiveDay(data, city);  
         });
 };
+
+
 
 /**
  * FUNCTION TO DISPLAY WEATHER IN DOM
@@ -131,19 +119,15 @@ function displayWeather(weatherData, city) {
 
 }
 
-/* <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-      <div class="col d-flex align-items-start">
-        <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-          <h3 class="fs-2">Featured title</h3>
-          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-          <a href="#" class="btn btn-primary">
-            Primary button
-          </a>
-        </div>
-      </div>*/
 
-
-
+/**
+ * FUNCTION TO DISPLAY FIVE DAY FORECAST IN DOM
+ * @param {*} fiveDayData refers to the fetched data from the Open Weather API
+ * @param {*} city refers to the user city input
+ * @returns 
+ * I had some trouble with getting the API to display the five day weather forecast rather than the upcoming five hour. 
+ * Because of this, I also had some issues getting the icon to display correctly. 
+ */
 
 function displayFiveDay(fiveDayData, city) {
     if (fiveDayData.length === 0) {
@@ -154,10 +138,13 @@ function displayFiveDay(fiveDayData, city) {
     const fiveDayRow = document.createElement('div'); 
     fiveDayRow.setAttribute('class', 'row g-4 py-5 row-cols-1 row-cols-sm-5');
 
+    // Created a secondary function to loop through the five day details without adding rows each time. 
     function displayFiveDayDetails (data) {
         for (let i = 0; i < 5; i++) {
             const column = document.createElement('div')
             const contentBox = document.createElement('div'); 
+            // const iconEl = document.createElement('img'); 
+            // let iconURL = 'http://openweathermap.org/img/w/' + fiveDayData.list[i].weather[i].icon + '.png'
             const date = document.createElement('h3'); 
             const temp = document.createElement('p'); 
             const humidity = document.createElement('p'); 
@@ -168,11 +155,11 @@ function displayFiveDay(fiveDayData, city) {
             // Dynamically adds containers and elements to display information for five-day conditions
             column.setAttribute('class', 'col d-flex align-items-center');
             contentBox.setAttribute('class', 'icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3')
+            // iconEl.setAttribute('src', iconURL); 
             date.setAttribute('class', 'fs-4 px-4 py-5');
             temp.setAttribute('class', 'col-sm-2 fs-6 px-4 py-5');
             humidity.setAttribute('class', 'col-sm-2 fs-6 px-4 py-5');
             windSpeed.setAttribute('class', 'col-sm-2 fs-6 px-4 py-5');
-            // iconEl.setAttribute('src', iconURL); 
 
             // Sets content for current weather conditions
             date.textContent = `${dateFormatted}`; 
@@ -181,7 +168,6 @@ function displayFiveDay(fiveDayData, city) {
             windSpeed.textContent = `Wind speed is ${data.list[i].wind.speed}mph`;
 
             // Appends elements into DOM
-            // h1.append(iconEl); 
             contentBox.append(date, temp, humidity, windSpeed); 
             column.append(contentBox); 
             fiveDayContainer.append(column); 
@@ -193,42 +179,81 @@ function displayFiveDay(fiveDayData, city) {
 }
 
 
-
 /**
  * FUNCTION TO SAVE USER INPUT INTO LOCAL STORAGE
  * @param {*} city refers to user city input
  */
 
  function saveCityLocalStorage(city){
-    let recentCites = localStorage.getItem('recentSearches'); 
-    console.log(recentCites); 
-    console.log(typeof recentCites); 
-    if (recentCites) {
-        recentCites = JSON.parse(recentCites); 
-        recentCites.push(city); 
-        recentCites = JSON.stringify(recentCites); 
-        localStorage.setItem('recentSearches', recentCites); 
+    let recentCities = localStorage.getItem('recentSearches'); 
+    if (recentCities) {
+        recentCities = JSON.parse(recentCities); 
+        recentCities.push(city); 
+        recentCities = JSON.stringify(recentCities); 
+        localStorage.setItem('recentSearches', recentCities); 
     } else {
-        recentCites = JSON.stringify([city]); 
-        localStorage.setItem('recentSearches', recentCites);
+        recentCities = JSON.stringify([city]); 
+        localStorage.setItem('recentSearches', recentCities);
     }
 }
 
 
-/**
- * PREVIOUS SEARCH HANDLER
- * @param {*} event is click of previously searched cities
- * This function regenerates weather of previously searched cities upon click. 
- */ 
+// FUNCTION RENDERS PREVIOUSLY SEARCHED CITIES
+function renderPreviousSearches() {
+    let recentCities = localStorage.getItem('recentSearches'); 
 
-// function previousSearchHandler(event) {
+    if (recentCities) {
+        let recentArray = JSON.parse(recentCities); 
 
-// }
+        for (let i = 0; i < 5; i++) {
+            let city = recentArray[i]; 
+
+            const btn = document.createElement('button'); 
+            btn.setAttribute('class', 'btn btn-info my-1 mx-2'); 
+            btn.textContent = `${city}`; 
+            previousSearches.append(btn); 
+
+            // This event regenerates weather of previously searched cities upon click. 
+
+            btn.addEventListener('click', function(event) {
+                event.preventDefault; 
+
+                if (city) {
+                    // Request for current weather
+                    let requestURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=e7f71632b8912e6ddef5440e9fe5e5fe&units=imperial'; 
+                
+                    fetch(requestURL)
+                        .then(function (response) {
+                            if (response.ok) {
+                                return response.json(); 
+                            }
+                        })
+                        .then(function (data) {
+                            displayWeather(data, city); 
+                        });
+
+                    // Request for five day
+                    let fiveDayURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=e7f71632b8912e6ddef5440e9fe5e5fe&units=imperial&per_page=5'; 
+
+                    fetch(fiveDayURL)
+                        .then(function (response) {
+                            if (response.ok) {
+                                return response.json(); 
+                            }
+                        })
+                        .then(function (data) {
+                            displayFiveDay(data, city);  
+                        }); 
+                }
+            })
+        }
+    } else {
+        previousSearches.textContent = `No previous searches`; 
+    }
+
+    
+}
 
 
-// function renderPreviousSearches() {
-
-// }
-
-
+renderPreviousSearches(); 
 submitForm.addEventListener('submit', formSubmitHandler);
